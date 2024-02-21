@@ -53,25 +53,6 @@
         my_pack.carry = document.getElementById("carry").checked;
         my_pack.tablet = document.getElementById("tablet").checked;
         out.innerHTML = JSON.stringify(my_pack);
-
-        // Bonus
-        const correctGuesses = Object.values(my_pack).filter(value => value).length;
-        const wrongGuesses = Object.keys(my_pack).length - correctGuesses;
-
-        if (wrongGuesses > correctGuesses) {
-            document.getElementById("checkboxForm").onclick = function() {
-                alert("Sorry, too many wrong guesses.");
-            };
-        }
-    }
-
-    function updatePack() {
-        console.log("Updating pack");
-        const updateResult = document.getElementById("updateResult");
-        my_pack.month = document.getElementById("travelMonth").value;
-        my_pack.price = document.getElementById("price").value;
-        updateResult.innerHTML = JSON.stringify(my_pack);
-    }
 </script>
 </body>
 </html>

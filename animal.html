@@ -1,44 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <title>Animal game</title>
- 
+<title>Animal game</title>
+
 <body>
 
-<h2>Animal game by Asha Noorbasha</h2>
+    <h1>Animal game by Asha Noorbasha</h1>
 
-<form>
-    <label for="form1_age">What is your age </label>
-    <input type ="number" id="form1_age" name="form1_age" min=10 max=50 step=2 value=30> <br>
+    <h2>Guess Animal</h2>
 
-    <label for="form1_nick">What is your nickname </label>
-    <input type ="text" id="form1_nick" name="form1_nick" autofocus> <br>
+    <form>
+        <label for="AnimalName">The hidden animal type</label>
+        <input type="password" id="AnimalName" value="Chicken">
+        <br>
+        <label for="guessAnimal">Guess the animal</label>
+        <input type="text" id="guessAnimal">
+        <br>
+        <button type="button" onclick="checkAnimal()">Check the guess</button>
+    </form>
 
-    <input type="button" onclick="resolveForm()" value="Get values from form">
-</form>
-
-
-<p id="Result">Correct: 0 | Wrong: 0</p>
-<div>
-    <button type="button"><img src="Appyfizz.webp" alt="Appyfizz img" width="150px" height="150px" onclick="SelectImage()" id="imageOne"></button>
-     
+    <p id="Result">Correct: 0 | Wrong: 0</p>
+    <div class="container">
+        <div class="row">
+            <p><b>Click on image</b></p>
+            <div id="imageContainer">
+                <img id="displayImage" src="coke.jpg" alt="coke" width="150" height="150"
+                    onclick="selectImage()">
+            </div>
+        </div>
     </div>
 
-<script> 
-
-function resolveForm (){
-    console.log("Getting form values")
-    age = document.getElementById("form1_age").value
-    nick = document.getElementById("form1_nick").value
-    confirmed = confirm("Are these the values? "+age+" and "+nick)
-    
-    out = document.getElementById("result")
-    if(confirmed){
-        out.innerHTML = "Values were confirmed"
-    } else {
-        out.innerHTML = "Values were not confirmed"
-    }
-}
-var useImage = 1;
+    <script>
+        var useImage = 1;
 
         function selectImage() {
             var imageElement = document.getElementById("displayImage");
@@ -58,6 +50,7 @@ var useImage = 1;
                     break;
             }
         }
-</script>
+    </script>
 </body>
-</html> 
+
+</html>

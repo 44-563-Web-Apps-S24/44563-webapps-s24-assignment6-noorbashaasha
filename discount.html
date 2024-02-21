@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Discount calcPage Html
+    </title>
+</head>
+
+<body>
+    <h1>Asha Noorbasha discount calculations</h1>
+
+    <h2>Getting input</h2>
+    <label for="cost">Enter price per</label>
+    <input type="number" name="cost" id="cost" value="10">
+    <label for="count">Enter the number of items</label>
+    <input type="number" name="count" id="count" value="9">
+    <label for="reductions"> Enter the discount percent</label>
+    <input type="number" name="reductions" id="reductions" value="5">
+    <input type="button" onclick="discount()" value="Show total">
+    <p id="result">
+        output
+    </p>
+
+    <form action="">
+        <input type="radio" id="total" name="Asha" onclick="chooseOp()" value="total">
+        <label for="total">Sum</label>
+        <input type="radio" id="multiplication" name="Asha" onclick="chooseOp()" value="multiplication">
+        <label for="multiplication">Mult</label>
+        <input type="radio" id="exponent" name="Asha" onclick="chooseOp()" value="exponent">
+        <label for="exponent">Exp</label>
+    </form>
+    <p id="output">result</p>
+
+    <script>
+        let myOutput = "Totals are: ";
+        function discount() {
+            let cost = parseInt(document.getElementById("cost").value);
+            let count = parseInt(document.getElementById("count").value);
+            let reductions = parseInt(document.getElementById("reductions").value);
+
+            for (let i = reductions; i < reductions + 5; i++) {
+                let discountPercent = i;
+                let total = cost * count * (1 - i / 100);
+                myOutput += `${discountPercent}% is ${total.toFixed(1)}; `;
+            }
+            document.getElementById("result").innerHTML = myOutput;
+        }
+
+
+        function chooseOp() {
+            let price = document.getElementById("cost").value;
+            let discount = document.getElementById("reductions").value;
+
+             let add = document.getElementById("total").checked;
+             let mul = document.getElementById("multiplication").checked;
+             let expt = document.getElementById("exponent").checked;
+            if (add) {
+                let count = parseInt(price) + parseInt(discount);
+                document.getElementById("output").innerHTML = "sum is " + count;
+            }
+            else if(mul) {
+                let mult = parseInt(price) * parseInt(discount);
+                document.getElementById("output").innerHTML = "mult is " + mult;
+            }
+            else if(expt) {
+                let exp = parseInt(price) ** parseInt(discount);
+                document.getElementById("output").innerHTML = "exp is " + exp;
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,76 +1,80 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>
-        Discount calcPage Html
-    </title>
-</head>
-
+ <head>
+    <title>Discount Calculations</title>
+ </head>
 <body>
-    <h1>Asha Noorbasha discount calculations</h1>
 
-    <h2>Getting input</h2>
-    <label for="cost">Enter price per</label>
-    <input type="number" name="cost" id="cost" value="10">
-    <label for="count">Enter the number of items</label>
-    <input type="number" name="count" id="count" value="9">
-    <label for="reductions"> Enter the discount percent</label>
-    <input type="number" name="reductions" id="reductions" value="5">
-    <input type="button" onclick="discount()" value="Show total">
-    <p id="result">
-        output
-    </p>
+<h2>Asha Noorbasha discount calculations</h2>
 
-    <form action="">
-        <input type="radio" id="total" name="Asha" onclick="chooseOp()" value="total">
-        <label for="total">Sum</label>
-        <input type="radio" id="multiplication" name="Asha" onclick="chooseOp()" value="multiplication">
-        <label for="multiplication">Mult</label>
-        <input type="radio" id="exponent" name="Asha" onclick="chooseOp()" value="exponent">
-        <label for="exponent">Exp</label>
-    </form>
-    <p id="output">result</p>
+<h2>Getting input</h2>
+<form>
+    <label for="price">Enter price per : </label>
+    <input type="number" id="price"  value="20">
+    <br>
+    <label for="count">Enter the number of items : </label>
+    <input type="number" id="count"  value="10">
+    <br>
+    <label for="discount">Enter the discount percentage : </label>
+    <input type="number" id="discount" value="5">
+    <br>
+    <button type="button" class="btn btn-success" onclick="discount()">Show Total</button>
+</form>
 
-    <script>
-        let myOutput = "Totals are: ";
-        function discount() {
-            let cost = parseInt(document.getElementById("cost").value);
-            let count = parseInt(document.getElementById("count").value);
-            let reductions = parseInt(document.getElementById("reductions").value);
+<p id="totals"></p>
 
-            for (let i = reductions; i < reductions + 5; i++) {
-                let discountPercent = i;
-                let total = cost * count * (1 - i / 100);
-                myOutput += `${discountPercent}% is ${total.toFixed(1)}; `;
-            }
-            document.getElementById("result").innerHTML = myOutput;
-        }
+<script>
+   function discount() {
+   let price = parseFloat(document.getElementById("price").value);
+   let number = parseFloat(document.getElementById("count").value);
+   let reduction = parseFloat(document.getElementById("discount").value);
+   let myOutput = "";
 
+   for (let i = 0; i < 5; i++) {
+       let discountedPrice = price * number - (price * number * (discount / 100));
+       myOutput += `${discount}% is ${discountedPrice.toFixed(1)}; `;
+       discount++;
+   }
 
+   document.getElementById('totals').innerHTML = 'Totals are: ' + myOutput;
+}
+</script>
+
+<form>
+    <div id="results">Mathematical Calculations: </div>
+
+    <label for="sum">Sum</label>
+    <input type="radio" id="sum" onclick="chooseOp()" name="operation"  value="sum">
+    <label for="mult">multiply</label>
+    <input type="radio" id="mult" onclick="chooseOp()" name="operation"  value="multiply">
+    <label for="exp">exponent</label>
+    <input type="radio" id="exp" onclick="chooseOp()" name="operation"  value="exponent">
+  </form>
+
+  <p id="result">Result will be displayed here!! </p>
+
+ <script>
         function chooseOp() {
-            let price = document.getElementById("cost").value;
-            let discount = document.getElementById("reductions").value;
+            let price = parseFloat(document.getElementById("price").value);
+            let discount = parseFloat(document.getElementById("discount").value);
+            let sum = document.getElementById("sum").checked;
+            let mul = document.getElementById("mult").checked;
+            let exp = document.getElementById("exp").checked;
 
-             let add = document.getElementById("total").checked;
-             let mul = document.getElementById("multiplication").checked;
-             let expt = document.getElementById("exponent").checked;
-            if (add) {
-                let count = parseInt(price) + parseInt(discount);
-                document.getElementById("output").innerHTML = "sum is " + count;
+            if(sum) {
+                result = price + discount;
+                document.getElementById("result").innerHTML = 'Sum of ' + price + ' and ' + discount + ' is ' + result;
+        
             }
             else if(mul) {
-                let mult = parseInt(price) * parseInt(discount);
-                document.getElementById("output").innerHTML = "mult is " + mult;
+                result = price * discount;
+                document.getElementById("result").innerHTML = 'Product of ' + price + ' and ' + discount + ' is ' + result;
             }
-            else if(expt) {
-                let exp = parseInt(price) ** parseInt(discount);
-                document.getElementById("output").innerHTML = "exp is " + exp;
+            else if(exp) {
+                result = Math.pow(price, discount);
+                document.getElementById("result").innerHTML = price + ' raised to the power of ' + discount + ' is ' + result;
             }
-
         }
-    </script>
-
+ </script>
 </body>
-
-</html>
+</html> 

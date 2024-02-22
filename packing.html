@@ -29,6 +29,7 @@
         <button class="btn btn-primary" type="button" onclick="selectPack()">Select for packing</button>
     </form>
     <div class="mt-4" id="packingResult"></div>
+    <div class="mt-4" id="guesses"></div> <!-- Added div for displaying guesses -->
     <form id="updateForm">
         <div class="form-group">
             <label for="travelMonth">Enter travel month</label>
@@ -46,6 +47,7 @@
 <script>
     let my_pack = {};
     const out = document.getElementById("packingResult");
+    const guesses = document.getElementById("guesses");
 
     function selectPack() {
         my_pack = {};
@@ -53,6 +55,34 @@
         my_pack.carry = document.getElementById("carry").checked;
         my_pack.tablet = document.getElementById("tablet").checked;
         out.innerHTML = JSON.stringify(my_pack);
+    }
+
+    let correctGuesses = 0;
+    let wrongGuesses = 0;
+
+    function checkGuess() {
+        const randomNumber = Math.floor(Math.random() * 10) + 1;
+
+        if (parseInt(prompt("Enter your guess")) === randomNumber) {
+            correctGuesses++;
+        } else {
+            wrongGuesses++;
+        }
+
+        displayGuesses();
+    }
+
+    function displayGuesses() {
+        guesses.innerHTML = `Correct Guesses: ${correctGuesses}, Wrong Guesses: ${wrongGuesses}`;
+
+        if (wrongGuesses > correctGuesses) {
+            document.querySelector('button').setAttribute('onclick', 'displayAlert()');
+        }
+    }
+
+    function displayAlert() {
+        alert('Sorry, too many wrong guesses.');
+    }
 </script>
 </body>
 </html>

@@ -1,40 +1,52 @@
 <!DOCTYPE html>
 <html>
-<title>Animal game</title>
+<head>
+    <title>Animal game</title>
 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
 <body>
-
-    <h1>Animal game by Asha Noorbasha</h1>
-
-    <h2>Guess Animal</h2>
-
-    <form>
-        <label for="AnimalName">The hidden animal type</label>
-        <input type="password" id="AnimalName" value="Chicken">
-        <br>
-        <label for="guessAnimal">Guess the animal</label>
-        <input type="text" id="guessAnimal">
-        <br>
-        <button type="button" onclick="checkAnimal()">Check the guess</button>
-    </form>
-
-    <p id="Result">Correct: 0 | Wrong: 0</p>
-    <div class="container">
-        <div class="row">
-            <p><b>Click on image</b></p>
-            <div id="imageContainer">
-                <img id="displayImage" src="coke.jpg" alt="coke" width="150" height="150"
-                    onclick="selectImage()">
+    <div class="container mt-5">
+        <h1 class="text-center">Animal game by Asha Noorbasha</h1>
+        <h2 class="text-center mb-4">Guess Animal</h2>
+        
+        <form class="text-center">
+            <div class="form-group">
+                <label for="AnimalName">The hidden animal type</label>
+                <input type="password" class="form-control" id="AnimalName" value="Chicken">
+            </div>
+            <div class="form-group">
+                <label for="guessAnimal">Guess the animal</label>
+                <input type="text" class="form-control" id="guessAnimal">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="checkAnimal()">Check the guess</button>
+        </form>
+        
+        <div class="mt-4">
+            <p id="Result" class="text-center">Correct: 0 | Wrong: 0</p>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <p class="text-center"><b>Click on image</b></p>
+                <div id="imageContainer" class="text-center">
+                    <img id="displayImage" src="coke.jpg" alt="coke" width="150" height="150" onclick="selectImage()">
+                </div>
             </div>
         </div>
     </div>
-
+    
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
     <script>
-        var useImage = 1;
-
+        var useImage = 3;
+        var correctGuesses = 0;
+        var wrongGuesses = 0;
+        
         function selectImage() {
             var imageElement = document.getElementById("displayImage");
-
+            
             switch (useImage) {
                 case 1:
                     imageElement.src = "Appy fizz.jpg";
@@ -50,7 +62,30 @@
                     break;
             }
         }
+        
+        function checkAnimal() {
+            var animalNameInput = document.getElementById("AnimalName");
+            var hiddenAnimalName = animalNameInput.value.toLowerCase();
+            var guessAnimalInput = document.getElementById("guessAnimal");
+            var guessedAnimal = guessAnimalInput.value.toLowerCase();
+            
+            if (guessedAnimal === hiddenAnimalName) {
+                correctGuesses++;
+            } else {
+                wrongGuesses++;
+            }
+            
+            document.getElementById("Result").textContent = "Correct: " + correctGuesses + " | Wrong: " + wrongGuesses;
+            
+            if (wrongGuesses > correctGuesses) {
+               
+                document.querySelector('button').setAttribute('onclick', 'tooManyWrongGuesses()');
+            }
+        }
+        
+        function tooManyWrongGuesses() {
+            alert("Sorry, too many wrong guesses.");
+        }
     </script>
 </body>
-
 </html>
